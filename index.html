@@ -83,8 +83,6 @@
             padding: 0.25rem 0.5rem;
             border-radius: 3px;
             font-size: 0.9rem;
-            opacity: 0;
-            transform: translateY(20px);
         }
         
         .social-links {
@@ -97,7 +95,6 @@
             color: var(--secondary-color);
             text-decoration: none;
             transition: color 0.3s ease;
-            opacity: 0;
             display: flex;
             align-items: center;
             font-size: 0.9rem;
@@ -124,7 +121,6 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            opacity: 1;
         }
         
         .contact-btn::before {
@@ -239,9 +235,9 @@
             });
 
             // Animate skills
-            gsap.to('.skill', { 
-                opacity: 1, 
-                y: 0, 
+            gsap.from('.skill', { 
+                y: 20,
+                opacity: 0, 
                 duration: 0.5, 
                 stagger: 0.05, 
                 ease: 'power3.out',
@@ -249,8 +245,9 @@
             });
 
             // Animate social links
-            gsap.to('.social-links a', { 
-                opacity: 1, 
+            gsap.from('.social-links a', { 
+                y: 20,
+                opacity: 0, 
                 duration: 0.5, 
                 stagger: 0.2, 
                 ease: 'power3.out',
