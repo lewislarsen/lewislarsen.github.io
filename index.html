@@ -1,116 +1,289 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lewis Larsen | IT Professional & PHP Developer</title>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="af5da9db-3a66-48c5-8331-5bae1a04e39f"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:300,400|poppins:300,400,500" rel="stylesheet" />
-    <title>Hey! | Lewis Larsen</title></head>
+    <link href="https://fonts.bunny.net/css?family=inter:400,700|poppins:400,700" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0a192f;
+            --text-color: #8892b0;
+            --highlight-color: #64ffda;
+            --secondary-color: #ccd6f6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--secondary-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--highlight-color);
+        }
+        
+        h3 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        .highlight {
+            color: var(--highlight-color);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--highlight-color);
+            border: 1px solid var(--highlight-color);
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: rgba(100, 255, 218, 0.1);
+        }
+        
+        .skills-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: var(--highlight-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        
+        .social-links {
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            text-decoration: none;
+            margin-right: 1rem;
+            transition: color 0.3s ease;
+            opacity: 0;
+            display: inline-block;
+        }
+        
+        .social-links a:hover {
+            color: var(--highlight-color);
+        }
+        
+        .contact-btn {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--highlight-color);
+            border: 1px solid var(--highlight-color);
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .contact-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: var(--highlight-color);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
+        
+        .contact-btn:hover {
+            color: var(--bg-color);
+        }
+        
+        .contact-btn:hover::before {
+            width: 100%;
+        }
+        
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
 <body>
-<h1>Lewis Larsen</h1>
-<hr />
-<p>
-    Hey there, my name is Lewis and welcome to my website. I am an IT professional and PHP web developer from the south-east of the United Kingdom.
-</p>
+    <div class="container">
+        <header>
+            <h1>Lewis Larsen</h1>
+            <h2>IT Professional & PHP Developer</h2>
+        </header>
 
-<p>
-    If you would like to get in touch with me, please send a message to <a href="mailto:lewis@larsens.dev">lewis@larsens.dev</a> and I will get back to you soon. You can also find me on various websites listed below.
-</p>
+        <main>
+            <p>
+                Hey there! I'm Lewis, an IT professional and PHP developer based in the south-east of the UK. 
+                I specialize in creating efficient and scalable web applications while also managing robust IT infrastructures.
+            </p>
 
-<ul>
-    <li><a class="socialButton" href="https://github.com/lewislarsen" title="GitHub">
-        <svg fill="currentColor" height="1792" viewBox="0 0 1792 1792" width="1792" xmlns="http://www.w3.org/2000/svg"><path d="M1664 896q0 251-146.5 451.5t-378.5 277.5q-27 5-39.5-7t-12.5-30v-211q0-97-52-142 57-6 102.5-18t94-39 81-66.5 53-105 20.5-150.5q0-121-79-206 37-91-8-204-28-9-81 11t-92 44l-38 24q-93-26-192-26t-192 26q-16-11-42.5-27t-83.5-38.5-86-13.5q-44 113-7 204-79 85-79 206 0 85 20.5 150t52.5 105 80.5 67 94 39 102.5 18q-40 36-49 103-21 10-45 15t-57 5-65.5-21.5-55.5-62.5q-19-32-48.5-52t-49.5-24l-20-3q-21 0-29 4.5t-5 11.5 9 14 13 12l7 5q22 10 43.5 38t31.5 51l10 23q13 38 44 61.5t67 30 69.5 7 55.5-3.5l23-4q0 38 .5 89t.5 54q0 18-13 30t-40 7q-232-77-378.5-277.5t-146.5-451.5q0-209 103-385.5t279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z"/></svg>
-    </a>
-    </li>
-    <li>
-        <a class="socialButton" href="https://www.linkedin.com/in/lewis-larsen-05abb9308" title="LinkedIn">
-           <svg fill="currentColor" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
-        </a>
-    </li>
-</ul>
+            <div class="skills-section">
+                <h3>Development Skills</h3>
+                <div class="skills">
+                    <span class="skill">PHP</span>
+                    <span class="skill">Laravel</span>
+                    <span class="skill">Livewire</span>
+                    <span class="skill">MySQL</span>
+                    <span class="skill">JavaScript</span>
+                    <span class="skill">Vue.js</span>
+                    <span class="skill">Git</span>
+                </div>
+            </div>
 
-<p>
-    Cheers :)
-</p>
+            <div class="skills-section">
+                <h3>IT Skills</h3>
+                <div class="skills">
+                    <span class="skill">Network Administration</span>
+                    <span class="skill">Cybersecurity</span>
+                    <span class="skill">Virtualization</span>
+                    <span class="skill">Docker</span>
+                    <span class="skill">IT Support</span>
+                </div>
+            </div>
+            
+            <p>
+                Interested in collaborating or just want to say hi? Feel free to reach out! 
+                I'm always open to discussing new projects or opportunities.
+            </p>
+
+            <a href="mailto:lewis@larsens.dev" class="contact-btn">Let's Connect</a>
+
+            <div class="social-links">
+                <a href="https://github.com/lewislarsen" title="GitHub" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/lewis-larsen-05abb9308" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate header
+            gsap.from('header', { 
+                y: -50, 
+                opacity: 0, 
+                duration: 1, 
+                ease: 'power3.out' 
+            });
+
+            // Animate paragraphs and button
+            gsap.from('p, .btn', { 
+                y: 20, 
+                opacity: 0, 
+                duration: 0.8, 
+                stagger: 0.2, 
+                ease: 'power3.out' 
+            });
+
+            // Animate skills
+            gsap.to('.skill', { 
+                opacity: 1, 
+                y: 0, 
+                duration: 0.5, 
+                stagger: 0.05, 
+                ease: 'power3.out',
+                delay: 0.5
+            });
+            
+            // Animate social links
+            gsap.to('.social-links a', { 
+                opacity: 1, 
+                duration: 0.5, 
+                stagger: 0.2, 
+                ease: 'power3.out',
+                delay: 1.5
+            });
+
+            // Animate contact button
+            gsap.from('.contact-btn', { 
+                y: 20, 
+                opacity: 0, 
+                duration: 0.8, 
+                delay: 1.2, 
+                ease: 'power3.out' 
+            });
+
+            // Hover animation for social links
+            gsap.utils.toArray('.social-links a').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    gsap.to(link, { scale: 1.2, duration: 0.3, ease: 'power2.out' });
+                });
+                link.addEventListener('mouseleave', () => {
+                    gsap.to(link, { scale: 1, duration: 0.3, ease: 'power2.out' });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
-
-<style>
-    html {
-        background: #181818;
-        color: #eee;
-        font-family: Inter, serif;
-        font-size: 18px;
-        line-height: 30px;
-    }
-
-    body {
-        margin: 37px 6%;
-    }
-
-    h1 {
-        color: #fff;
-        text-align: center;
-        font-weight: 500;
-    }
-
-    a {
-        color: #b4f6ff;
-        text-decoration: underline;
-    }
-
-    a:focus, a:hover, a:active {
-        text-decoration: none;
-        color: #222222;
-        background: #b4f6ff;
-    }
-
-    p, ul, hr {
-        margin: 0 0 35px;
-    }
-
-    ul {
-        list-style: none;
-        display: flex;
-        gap: 1rem;
-        padding: 0;
-    }
-
-    ul > li {
-        margin-left: 0;
-    }
-
-    svg {
-        height: 3rem;
-        width: 3rem;
-        color: inherit;
-    }
-
-    .socialButton {
-        color: #ffffff;
-        display: block;
-        aspect-ratio: 1/1;
-        width: auto;
-        height: auto;
-        border-radius: .25rem;
-        padding: .5rem;
-        background: #1e1e1e;
-    }
-
-    hr {
-        background: transparent;
-        border-bottom: 3px solid #595959;
-        border-top: 1px solid #111111;
-        overflow: hidden;
-    }
-
-    @media only screen and (min-width: 481px) {
-        html {
-            font-size: 21px;
-            line-height: 32px;
-        }
-        body {
-            margin: 75px auto;
-            width: 560px;
-        }
-    }
-</style>
