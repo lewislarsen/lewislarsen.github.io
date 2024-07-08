@@ -67,22 +67,6 @@
             color: var(--highlight-color);
         }
         
-        .btn {
-            display: inline-block;
-            background-color: transparent;
-            color: var(--highlight-color);
-            border: 1px solid var(--highlight-color);
-            padding: 0.5rem 1rem;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-        }
-        
-        .btn:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-        }
-        
         .skills-section {
             margin-bottom: 1.5rem;
         }
@@ -103,23 +87,28 @@
             transform: translateY(20px);
         }
         
-        
         .social-links {
             margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
         }
         
         .social-links a {
             color: var(--secondary-color);
-            font-size: 1.5rem;
             text-decoration: none;
-            margin-right: 1rem;
             transition: color 0.3s ease;
             opacity: 0;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
         }
         
         .social-links a:hover {
             color: var(--highlight-color);
+        }
+
+        .social-links a svg {
+            margin-right: 0.5rem;
         }
         
         .contact-btn {
@@ -135,6 +124,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
+            opacity: 1;
         }
         
         .contact-btn::before {
@@ -190,7 +180,6 @@
                 <div class="skills">
                     <span class="skill">PHP</span>
                     <span class="skill">Laravel</span>
-                    <span class="skill">Livewire</span>
                     <span class="skill">MySQL</span>
                     <span class="skill">JavaScript</span>
                     <span class="skill">Vue.js</span>
@@ -202,13 +191,14 @@
                 <h3>IT Skills</h3>
                 <div class="skills">
                     <span class="skill">Network Administration</span>
+                    <span class="skill">Cloud Services (AWS)</span>
                     <span class="skill">Cybersecurity</span>
                     <span class="skill">Virtualization</span>
                     <span class="skill">Docker</span>
                     <span class="skill">IT Support</span>
                 </div>
             </div>
-            
+
             <p>
                 Interested in collaborating or just want to say hi? Feel free to reach out! 
                 I'm always open to discussing new projects or opportunities.
@@ -219,9 +209,11 @@
             <div class="social-links">
                 <a href="https://github.com/lewislarsen" title="GitHub" target="_blank" rel="noopener noreferrer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    GitHub
                 </a>
                 <a href="https://www.linkedin.com/in/lewis-larsen-05abb9308" title="LinkedIn" target="_blank" rel="noopener noreferrer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    LinkedIn
                 </a>
             </div>
         </main>
@@ -237,8 +229,8 @@
                 ease: 'power3.out' 
             });
 
-            // Animate paragraphs and button
-            gsap.from('p, .btn', { 
+            // Animate paragraphs
+            gsap.from('p', { 
                 y: 20, 
                 opacity: 0, 
                 duration: 0.8, 
@@ -255,7 +247,7 @@
                 ease: 'power3.out',
                 delay: 0.5
             });
-            
+
             // Animate social links
             gsap.to('.social-links a', { 
                 opacity: 1, 
@@ -277,7 +269,7 @@
             // Hover animation for social links
             gsap.utils.toArray('.social-links a').forEach(link => {
                 link.addEventListener('mouseenter', () => {
-                    gsap.to(link, { scale: 1.2, duration: 0.3, ease: 'power2.out' });
+                    gsap.to(link, { scale: 1.05, duration: 0.3, ease: 'power2.out' });
                 });
                 link.addEventListener('mouseleave', () => {
                     gsap.to(link, { scale: 1, duration: 0.3, ease: 'power2.out' });
