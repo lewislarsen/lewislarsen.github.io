@@ -6,108 +6,137 @@
     <title>Lewis Larsen | IT Professional & PHP Developer</title>
     <script defer src="https://cloud.umami.is/script.js" data-website-id="af5da9db-3a66-48c5-8331-5bae1a04e39f"></script>
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=inter:400,700|poppins:400,700" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=fira-sans:300,400,600|fira-code:400" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
     <style>
         :root {
-            --bg-color: #0a192f;
-            --text-color: #8892b0;
-            --highlight-color: #64ffda;
-            --secondary-color: #ccd6f6;
+            --bg-color: #f0f0f0;
+            --text-color: #333;
+            --highlight-color: #0077b6;
+            --secondary-color: #023e8a;
+            --skill-bg-color: rgba(0, 119, 182, 0.1);
+            --skill-color: #0077b6;
         }
-        
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-color: #0a192f;
+                --text-color: #8892b0;
+                --highlight-color: #64ffda;
+                --secondary-color: #ccd6f6;
+                --skill-bg-color: rgba(100, 255, 218, 0.1);
+                --skill-color: #64ffda;
+            }
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Fira Sans', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
             padding: 2rem;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
         }
-        
+
         h1, h2, h3 {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Fira Sans', sans-serif;
             color: var(--secondary-color);
+            letter-spacing: -0.5px;
         }
-        
+
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            font-weight: 600;
         }
-        
+
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 1rem;
             color: var(--highlight-color);
+            font-weight: 300;
         }
-        
+
         h3 {
-            font-size: 1.2rem;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
         }
-        
+
         p {
             margin-bottom: 1.5rem;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            line-height: 1.7;
         }
-        
+
         .highlight {
             color: var(--highlight-color);
         }
-        
+
         .skills-section {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
-        
+
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.75rem;
         }
-        
+
         .skill {
-            background-color: rgba(100, 255, 218, 0.1);
-            color: var(--highlight-color);
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
+            background-color: var(--skill-bg-color);
+            color: var(--skill-color);
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
             font-size: 0.9rem;
+            font-family: 'Fira Code', monospace;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-        
+
+        .skill:hover {
+            background-color: var(--highlight-color);
+            color: var(--bg-color);
+            transform: translateY(-2px);
+        }
+
         .social-links {
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             display: flex;
             gap: 1.5rem;
         }
-        
+
         .social-links a {
             color: var(--secondary-color);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
-        
+
         .social-links a:hover {
             color: var(--highlight-color);
+            transform: translateY(-2px);
         }
 
         .social-links a svg {
             margin-right: 0.5rem;
         }
-        
+
         .contact-btn {
             display: inline-block;
             background-color: transparent;
@@ -116,13 +145,16 @@
             padding: 0.75rem 1.5rem;
             font-size: 1rem;
             text-decoration: none;
-            transition: all 0.3s ease;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
             position: relative;
             overflow: hidden;
             z-index: 1;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+            border-radius: 5px;
         }
-        
+
         .contact-btn::before {
             content: '';
             position: absolute;
@@ -134,145 +166,322 @@
             transition: all 0.3s ease;
             z-index: -1;
         }
-        
+
         .contact-btn:hover {
             color: var(--bg-color);
         }
-        
+
         .contact-btn:hover::before {
             width: 100%;
         }
-        
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            animation: bounce 2s infinite;
+            stroke: var(--secondary-color);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--highlight-color);
+            color: var(--bg-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            transform: translateY(20px);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--highlight-color);
+        }
+
+        .skill-tooltip {
+            position: absolute;
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+
         @media (max-width: 600px) {
             body {
-                padding: 1rem;
+                padding: 1.5rem;
             }
-            
+
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
-            
+
             h2 {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
+
+            .back-to-top {
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        /* Dark theme */
+        body.dark-theme {
+            --bg-color: #0a192f;
+            --text-color: #8892b0;
+            --highlight-color: #64ffda;
+            --secondary-color: #ccd6f6;
+            --skill-bg-color: rgba(100, 255, 218, 0.1);
+            --skill-color: #64ffda;
+        }
+
+        body.light-theme {
+            --bg-color: #f0f0f0;
+            --text-color: #333;
+            --highlight-color: #0077b6;
+            --secondary-color: #023e8a;
+            --skill-bg-color: rgba(0, 119, 182, 0.1);
+            --skill-color: #0077b6;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Lewis Larsen</h1>
-            <h2>IT Professional & PHP Developer</h2>
-        </header>
+<div class="container">
+    <header>
+        <h1>Lewis Larsen</h1>
+        <h2>IT Professional & PHP Developer</h2>
+    </header>
 
-        <main>
-            <p>
-                Hey there! I'm Lewis, an IT professional and PHP developer based in the south-east of the UK. 
-                I specialize in creating efficient and scalable web applications while also managing robust IT infrastructures.
-            </p>
+    <main>
+        <p>
+            Hey there! I'm Lewis, an IT professional and PHP developer based in the south-east of the UK.
+            I specialize in creating <span class="highlight">efficient and scalable web applications</span> while also managing robust IT infrastructures.
+        </p>
 
-            <div class="skills-section">
-                <h3>Development Skills</h3>
-                <div class="skills">
-                    <span class="skill">PHP</span>
-                    <span class="skill">Laravel</span>
-                    <span class="skill">MySQL</span>
-                    <span class="skill">JavaScript</span>
-                    <span class="skill">Vue.js</span>
-                    <span class="skill">Git</span>
-                </div>
+        <div class="skills-section">
+            <h3>Development Skills</h3>
+            <div class="skills">
+                <span class="skill" data-tooltip="Server-side scripting language">PHP</span>
+                <span class="skill" data-tooltip="PHP web application framework">Laravel</span>
+                <span class="skill" data-tooltip="Relational database management system">MySQL</span>
+                <span class="skill" data-tooltip="Client-side scripting language">JavaScript</span>
+                <span class="skill" data-tooltip="Progressive JavaScript framework">Vue.js</span>
+                <span class="skill" data-tooltip="Version control system">Git</span>
             </div>
+        </div>
 
-            <div class="skills-section">
-                <h3>IT Skills</h3>
-                <div class="skills">
-                    <span class="skill">Network Administration</span>
-                    <span class="skill">Cloud Services (AWS)</span>
-                    <span class="skill">Cybersecurity</span>
-                    <span class="skill">Virtualization</span>
-                    <span class="skill">Docker</span>
-                    <span class="skill">IT Support</span>
-                </div>
+        <div class="skills-section">
+            <h3>IT Skills</h3>
+            <div class="skills">
+                <span class="skill" data-tooltip="Managing and maintaining computer networks">Network Administration</span>
+                <span class="skill" data-tooltip="Amazon Web Services cloud computing platform">Cloud Services (AWS)</span>
+                <span class="skill" data-tooltip="Protecting computer systems from theft or damage">Cybersecurity</span>
+                <span class="skill" data-tooltip="Creating virtual versions of IT resources">Virtualization</span>
+                <span class="skill" data-tooltip="Platform for developing, shipping, and running applications">Docker</span>
+                <span class="skill" data-tooltip="Providing technical assistance and support">IT Support</span>
             </div>
+        </div>
 
-            <p>
-                Interested in collaborating or just want to say hi? Feel free to reach out! 
-                I'm always open to discussing new projects or opportunities.
-            </p>
+        <p>
+            Interested in collaborating or just want to say hi? Feel free to reach out!
+            I'm always open to discussing new projects or opportunities.
+        </p>
 
-            <a href="mailto:lewis@larsens.dev" class="contact-btn">Let's Connect</a>
+        <a href="mailto:lewis@larsens.dev" class="contact-btn">Let's Connect</a>
 
-            <div class="social-links">
-                <a href="https://github.com/lewislarsen" title="GitHub" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                    GitHub
-                </a>
-                <a href="https://www.linkedin.com/in/lewis-larsen-05abb9308" title="LinkedIn" target="_blank" rel="noopener noreferrer">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    LinkedIn
-                </a>
-            </div>
-        </main>
-    </div>
+        <div class="social-links">
+            <a href="https://github.com/lewislarsen" title="GitHub" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                GitHub
+            </a>
+            <a href="https://www.linkedin.com/in/lewis-larsen-05abb9308" title="LinkedIn" target="_blank" rel="noopener noreferrer">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                LinkedIn
+            </a>
+        </div>
+    </main>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Animate header
-            gsap.from('header', { 
-                y: -50, 
-                opacity: 0, 
-                duration: 1, 
-                ease: 'power3.out' 
+<div class="scroll-indicator">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+</div>
+
+<a href="#" class="back-to-top" aria-label="Scroll to top">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+
+<button class="theme-toggle" aria-label="Toggle dark mode">
+    🌓
+</button>
+
+<div class="skill-tooltip"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        gsap.set('.skill', { opacity: 0, y: 20 });
+        gsap.set('.social-links a', { opacity: 0, y: 20 });
+        gsap.set('.contact-btn', { opacity: 0, scale: 0.95 });
+
+        gsap.from('header', {
+            y: -50,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out'
+        });
+
+        gsap.from('p', {
+            y: 20,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+
+        gsap.to('.skill', {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.05,
+            ease: 'power3.out',
+            delay: 0.5
+        });
+
+        gsap.to('.contact-btn', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            delay: 1.2,
+            ease: 'elastic.out(1, 0.5)'
+        });
+
+        gsap.to('.social-links a', {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            stagger: 0.2,
+            ease: 'power3.out',
+            delay: 1.5
+        });
+
+        gsap.utils.toArray('.social-links a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(link, { y: -2, duration: 0.3, ease: 'power2.out' });
             });
-
-            // Animate paragraphs
-            gsap.from('p', { 
-                y: 20, 
-                opacity: 0, 
-                duration: 0.8, 
-                stagger: 0.2, 
-                ease: 'power3.out' 
-            });
-
-            // Animate skills
-            gsap.from('.skill', { 
-                y: 20,
-                opacity: 0, 
-                duration: 0.5, 
-                stagger: 0.05, 
-                ease: 'power3.out',
-                delay: 0.5
-            });
-
-            // Animate social links
-            gsap.from('.social-links a', { 
-                y: 20,
-                opacity: 0, 
-                duration: 0.5, 
-                stagger: 0.2, 
-                ease: 'power3.out',
-                delay: 1.5
-            });
-
-            // Animate contact button
-            gsap.from('.contact-btn', { 
-                y: 20, 
-                opacity: 0, 
-                duration: 0.8, 
-                delay: 1.2, 
-                ease: 'power3.out' 
-            });
-
-            // Hover animation for social links
-            gsap.utils.toArray('.social-links a').forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    gsap.to(link, { scale: 1.05, duration: 0.3, ease: 'power2.out' });
-                });
-                link.addEventListener('mouseleave', () => {
-                    gsap.to(link, { scale: 1, duration: 0.3, ease: 'power2.out' });
-                });
+            link.addEventListener('mouseleave', () => {
+                gsap.to(link, { y: 0, duration: 0.3, ease: 'power2.out' });
             });
         });
-    </script>
+
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        window.addEventListener('scroll', () => {
+            const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            scrollIndicator.style.opacity = Math.max(0, 1 - scrollPercentage / 20);
+        });
+
+        const themeToggle = document.querySelector('.theme-toggle');
+        const body = document.body;
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                body.classList.add('dark-theme');
+                body.classList.remove('light-theme');
+            } else {
+                body.classList.add('light-theme');
+                body.classList.remove('dark-theme');
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        } else {
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            setTheme(systemTheme);
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.classList.contains('dark-theme') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            const newTheme = e.matches ? 'dark' : 'light';
+            setTheme(newTheme);
+        });
+        const skillTooltip = document.querySelector('.skill-tooltip');
+        const skills = document.querySelectorAll('.skill');
+
+        skills.forEach(skill => {
+            skill.addEventListener('mouseenter', (e) => {
+                skillTooltip.textContent = skill.getAttribute('data-tooltip');
+                skillTooltip.style.opacity = '1';
+
+                const rect = skill.getBoundingClientRect();
+                skillTooltip.style.left = `${rect.left}px`;
+                skillTooltip.style.top = `${rect.bottom + 5}px`;
+            });
+
+            skill.addEventListener('mouseleave', () => {
+                skillTooltip.style.opacity = '0';
+            });
+        });
+
+    });
+</script>
 </body>
 </html>
