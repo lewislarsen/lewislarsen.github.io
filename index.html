@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=fira-sans:300,400,600|fira-code:400" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <link id="favicon" rel="icon" href="data:," sizes="any">
     <style>
         :root {
             --bg-color: #f0f0f0;
@@ -296,12 +297,44 @@
             --skill-bg-color: rgba(0, 119, 182, 0.1);
             --skill-color: #0077b6;
         }
+
+        .name-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo-svg path,
+        .logo-svg circle {
+            transition: fill 0.3s ease;
+        }
+
+        @media (max-width: 600px) {
+            .logo-svg {
+                width: 40px;
+                height: 40px;
+            }
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <header>
-        <h1>Lewis Larsen</h1>
+        <div class="name-logo">
+            <h1>Lewis Larsen</h1>
+            <svg class="logo-svg" viewBox="0 0 100 100">
+                <path d="M20 20 L40 20 L40 80 L20 80 Z" fill="var(--highlight-color)" />
+                <path d="M60 20 L80 20 L80 80 L60 80 Z" fill="var(--highlight-color)" />
+                <path d="M40 50 L60 50 L60 60 L40 60 Z" fill="var(--highlight-color)" />
+                <circle cx="30" cy="30" r="5" fill="var(--bg-color)" />
+                <circle cx="70" cy="70" r="5" fill="var(--bg-color)" />
+            </svg>
+        </div>
         <h2>IT Professional & PHP Developer</h2>
     </header>
 
@@ -370,6 +403,37 @@
 <div class="skill-tooltip"></div>
 
 <script>
+    function updateFavicon(isDarkMode) {
+        const favicon = document.getElementById('favicon');
+        const primaryColor = isDarkMode ? '#64ffda' : '#0077b6';
+        const secondaryColor = isDarkMode ? '#0a192f' : '#f0f0f0';
+        const svg = `
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <rect width="100" height="100" fill="${secondaryColor}" />
+                <path d="M20 20 L40 20 L40 80 L20 80 Z" fill="${primaryColor}" />
+                <path d="M60 20 L80 20 L80 80 L60 80 Z" fill="${primaryColor}" />
+                <path d="M40 50 L60 50 L60 60 L40 60 Z" fill="${primaryColor}" />
+                <circle cx="30" cy="30" r="5" fill="${secondaryColor}" />
+                <circle cx="70" cy="70" r="5" fill="${secondaryColor}" />
+            </svg>
+        `;
+        favicon.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+    }
+
+    function setTheme(theme) {
+        const body = document.body;
+        const isDarkMode = theme === 'dark';
+        if (isDarkMode) {
+            body.classList.add('dark-theme');
+            body.classList.remove('light-theme');
+        } else {
+            body.classList.add('light-theme');
+            body.classList.remove('dark-theme');
+        }
+        localStorage.setItem('theme', theme);
+        updateFavicon(isDarkMode);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         gsap.set('.skill', { opacity: 0, y: 20 });
         gsap.set('.social-links a', { opacity: 0, y: 20 });
@@ -434,17 +498,6 @@
         const themeToggle = document.querySelector('.theme-toggle');
         const body = document.body;
 
-        function setTheme(theme) {
-            if (theme === 'dark') {
-                body.classList.add('dark-theme');
-                body.classList.remove('light-theme');
-            } else {
-                body.classList.add('light-theme');
-                body.classList.remove('dark-theme');
-            }
-            localStorage.setItem('theme', theme);
-        }
-
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             setTheme(savedTheme);
@@ -463,6 +516,7 @@
             const newTheme = e.matches ? 'dark' : 'light';
             setTheme(newTheme);
         });
+
         const skillTooltip = document.querySelector('.skill-tooltip');
         const skills = document.querySelectorAll('.skill');
 
@@ -480,7 +534,6 @@
                 skillTooltip.style.opacity = '0';
             });
         });
-
     });
 </script>
 </body>
