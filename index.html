@@ -422,13 +422,6 @@
     <header>
         <div class="name-logo">
             <h1>Lewis Larsen</h1>
-            <svg class="logo-svg" viewBox="0 0 100 100">
-                <path d="M20 20 L40 20 L40 80 L20 80 Z" fill="var(--highlight-color)" />
-                <path d="M60 20 L80 20 L80 80 L60 80 Z" fill="var(--highlight-color)" />
-                <path d="M40 50 L60 50 L60 60 L40 60 Z" fill="var(--highlight-color)" />
-                <circle cx="30" cy="30" r="5" fill="var(--bg-color)" />
-                <circle cx="70" cy="70" r="5" fill="var(--bg-color)" />
-            </svg>
         </div>
         <h2>IT Professional & PHP Developer</h2>
     </header>
@@ -436,8 +429,8 @@
     <main>
         <section class="intro-section">
             <p>
-                Hey there! I'm Lewis, an IT professional and PHP developer based in the south-east of the UK.
-                I specialize in creating <span class="highlight">efficient and scalable web applications</span> while also managing robust IT infrastructures.
+                I'm Lewis, an IT professional and experienced PHP developer from the UK. For a long time now, I've been building
+                <span class="highlight">scalable and secure web applications</span> and managing reliable IT systems—all from the comfort of home.
             </p>
         </section>
 
@@ -447,6 +440,7 @@
                 <span class="skill" data-tooltip="Server-side scripting language">PHP</span>
                 <span class="skill" data-tooltip="PHP web application framework">Laravel</span>
                 <span class="skill" data-tooltip="Relational database management system">MySQL</span>
+                <span class="skill" data-tooltip="Relational database management system">PostgreSQL</span>
                 <span class="skill" data-tooltip="Client-side scripting language">JavaScript</span>
                 <span class="skill" data-tooltip="Progressive JavaScript framework">Vue.js</span>
                 <span class="skill" data-tooltip="Version control system">Git</span>
@@ -461,13 +455,14 @@
                 <span class="skill" data-tooltip="Protecting computer systems from theft or damage">Cybersecurity</span>
                 <span class="skill" data-tooltip="Creating virtual versions of IT resources">Virtualization</span>
                 <span class="skill" data-tooltip="Platform for developing, shipping, and running applications">Docker</span>
-                <span class="skill" data-tooltip="Providing technical assistance and support">IT Support</span>
+                <span class="skill" data-tooltip="Providing technical assistance and support">General IT Support</span>
             </div>
         </section>
 
         <section class="projects-section">
             <h3>Projects</h3>
             <div class="project-list">
+
                 <div class="project">
                     <div class="project-header">
                         <img src="/projects/vanguard-thumbnail.png" alt="Vanguard Project" class="project-thumbnail">
@@ -478,6 +473,29 @@
                     </p>
                     <a href="https://vanguardbackup.com" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
                 </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <img src="/projects/leagues-thumbnail.png" alt="League Tracker Project" class="project-thumbnail">
+                        <h4 class="project-title">OSRS League Tracker</h4>
+                    </div>
+                    <p class="project-description">
+                        Track the average player count in Old School RuneScape (OSRS) Leagues.
+                    </p>
+                    <a href="https://leagues.larsens.dev" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+
+                <div class="project">
+                    <div class="project-header">
+                        <img src="/projects/runelite-thumbnail.png" alt="RuneLite Plugin Project" class="project-thumbnail">
+                        <h4 class="project-title">RuneLite Client Plugin</h4>
+                    </div>
+                    <p class="project-description">
+                        This plugin for RuneLite enhances the game by adding additional sound alerts.
+                    </p>
+                    <a href="https://github.com/lewislarsen/sound-alerts-expanded" class="project-link" target="_blank" rel="noopener noreferrer">View Project</a>
+                </div>
+
             </div>
         </section>
 
@@ -606,7 +624,7 @@
         });
 
         gsap.from('.project', {
-            y: 30,
+            y: 0,
             opacity: 0,
             duration: 0.6,
             stagger: 0.1,
