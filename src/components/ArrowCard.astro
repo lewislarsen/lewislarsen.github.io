@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { Icon } from "astro-icon/components";
 import FormattedDate from "./FormattedDate.astro";
 type Props = {
   entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
@@ -8,6 +7,7 @@ type Props = {
 };
 const { entry, featured = false } = Astro.props;
 const hasDate = entry.data.date;
+const launchYear = entry.data.launchYear ?? null;
 ---
 <a
     href={`/${entry.collection}/${entry.slug}`}
@@ -18,10 +18,13 @@ const hasDate = entry.data.date;
     <div class="font-semibold flex items-center gap-4">
       <div class="space-y-2">
         <div class="line-clamp-2">{entry.data.title}</div>
-        {hasDate && (
+        {(launchYear || hasDate) && (
             <div class="text-xs text-black/60 dark:text-white/60 font-normal">
-              <FormattedDate date={hasDate} />
+              {launchYear
+                  ? `Launched ${launchYear}`
+                  : <>Published <FormattedDate date={hasDate} /></>}
             </div>
+
         )}
         <div class="text-sm line-clamp-2 font-normal text-black/80 dark:text-white/80">
           {entry.data.description}
