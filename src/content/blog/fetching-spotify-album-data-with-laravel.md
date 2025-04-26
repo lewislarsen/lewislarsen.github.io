@@ -1,6 +1,6 @@
 ---
 title: Using the Spotify API to get Cover images with Laravel
-description: Welcome to my first blog entry.
+description: Tutorial on contacting the Spotify API in a Laravel application.
 date: Apr 29, 2025
 tags: ["laravel", "testing", "spotify",]
 ---
