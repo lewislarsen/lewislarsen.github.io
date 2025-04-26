@@ -1,8 +1,6 @@
 ---
 import Container from "@components/Container.astro";
-import { SITE } from "@consts";
 import BackToTop from "@components/BackToTop.astro";
-import Link from "./Link.astro";
 import { Icon } from "astro-icon/components";
 ---
 <footer class="animate">
@@ -92,7 +90,7 @@ import { Icon } from "astro-icon/components";
     </div>
   </Container>
 </footer>
-<script type="text/javascript">
+<script type="text/javascript" is:inline>
   function updateStardate() {
     const now = new Date(),
         year = now.getFullYear(),
