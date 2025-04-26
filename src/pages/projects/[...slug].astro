@@ -1,0 +1,82 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import FormattedDate from "@components/FormattedDate.astro";
+import { readingTime } from "@lib/utils";
+import BackToPrev from "@components/BackToPrev.astro";
+import Link from "@components/Link.astro";
+import { Icon } from "astro-icon/components";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: project,
+  }));
+}
+type Props = CollectionEntry<"projects">;
+
+const project = Astro.props;
+const { Content } = await project.render();
+---
+
+<PageLayout title={project.data.title} description={project.data.description}>
+  <Container>
+    <div class="animate">
+      <BackToPrev href="/projects"> Back to projects </BackToPrev>
+    </div>
+    <div class="flex justify-between items-start gap-4 my-10">
+      <div class="flex items-center gap-4">
+        <div class="flex-shrink-0">
+          <img
+              src={`${Astro.site}thumbnails/${project.data.thumbnailURL}`}
+              alt={`${project.data.title} thumbnail`}
+              class="w-20 h-20 object-contain rounded-lg overflow-hidden border-none"
+          />
+        </div>
+        <div class="flex flex-col">
+          <h2 class="text-xl font-semibold text-black dark:text-white">{project.data.title}</h2>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{project.data.description}</p>
+          {(project.data.websiteURL || project.data.repoURL) && (
+              <nav class="flex gap-2 mt-3">
+                {project.data.docsURL && (
+                    <Link href={project.data.docsURL} external>
+                      <Icon name="book" class="h-5 w-5" />
+                    </Link>
+                )}
+                {project.data.websiteURL && (
+                    <Link href={project.data.websiteURL} external>
+                      <Icon name="link" class="h-5 w-5" />
+                    </Link>
+                )}
+                {project.data.websiteURL && project.data.repoURL && <span></span>}
+                {project.data.repoURL && (
+                    <Link href={project.data.repoURL} external>
+                      <Icon name="github" class="h-5 w-5" />
+                    </Link>
+                )}
+              </nav>
+          )}
+        </div>
+      </div>
+      <div class="flex flex-col items-end text-sm text-gray-700 dark:text-gray-300">
+        <div class="flex items-center gap-1">
+          <span>State:</span>
+          <Icon
+              title={project.data.activelyBeingDeveloped ? 'Active' : 'Inactive'}
+              name={project.data.activelyBeingDeveloped ? 'check' : 'cross'}
+              class={`h-5 w-5 ${project.data.activelyBeingDeveloped ? 'text-green-500' : 'text-red-500'}`}
+          />
+          {project.data.activelyBeingDeveloped ? 'Active' : 'Inactive'}
+        </div>
+        <span>Launched: {project.data.launchYear}</span>
+      </div>
+    </div>
+    <article class="animate">
+      <Content />
+    </article>
+  </Container>
+</PageLayout>

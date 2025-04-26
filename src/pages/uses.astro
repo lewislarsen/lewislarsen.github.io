@@ -1,0 +1,74 @@
+---
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import { USES } from "@consts";
+import Link from "@components/Link.astro";
+---
+
+<PageLayout title={USES.TITLE} description={USES.DESCRIPTION}>
+    <Container>
+        <div class="space-y-10">
+            <div class="animate font-semibold text-black dark:text-white">Uses</div>
+            <div class="space-y-4">
+                <section class="animate space-y-6">
+                    <p>This is an exhaustive list of everything that I use in my day-to-day for my web projects. :)</p>
+                    <p>I hope you enjoy reading!</p>
+
+                    <div>
+                        <h2 class="text-lg font-bold">Workspace</h2>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li><strong>MacBook Pro</strong> – My primary machine for all development work and internet browsing.</li>
+                            <li><strong>Laravel Valet</strong> – Lightweight development environment for Laravel and PHP projects, there are options like Herd but I've never had any issues here. Why rock the boat?</li>
+                            <li><strong>DBngin</strong> – Simple local database management that just works.</li>
+                            <li><strong>TablePlus</strong> – A client I've used for years for managing both local and production databases. Highly, highly recommend.</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-lg font-bold">Development</h2>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>
+                                <strong>PHPStorm</strong> – My main IDE, developed by
+                                <Link href="https://www.jetbrains.com/phpstorm/" external>JetBrains</Link> and is the only option for PHP in my opinion.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-lg font-bold">Hosting & Deployment</h2>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>
+                                <Link href="https://upcloud.com" external>Upcloud</Link> – My main hosting provider, great region locations and amazing support.
+                            </li>
+                            <li>
+                                <Link href="https://www.hetzner.com/cloud" external>Hetzner</Link> – Used for lower-priority projects of mine.
+                            </li>
+                            <li>
+                                <Link href="https://ploi.io" external>Ploi</Link> – My go-to for deploying Laravel projects. Reliable and Dennis the owner is a lovely guy.
+                            </li>
+                            <li>
+                                <Link href="https://pages.github.com/" external>GitHub Pages</Link> – Great for hosting static sites like this one and Vanguard’s docs.
+                            </li>
+                            <li>
+                                <Link href="https://porkbun.com" external>Porkbun</Link> – Where I register all my domains and is my favourite out of many I've tried before.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-lg font-bold">Productivity</h2>
+                        <ul class="list-disc list-inside space-y-2">
+                            <li>
+                                <Link href="https://mullvad.net" external>MullvadVPN</Link> – I typically use a VPN all the time and I highly recommend you do so too!
+                            </li>
+                            <li>
+                                <Link href="https://apps.apple.com/us/app/mail/id1108187098" external>Apple Mail</Link> – The default mail client on MacOS. I love how it just works and is straightforward. No bling no fuss.
+
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </Container>
+</PageLayout>

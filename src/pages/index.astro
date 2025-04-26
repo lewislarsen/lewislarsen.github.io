@@ -1,0 +1,105 @@
+---
+import { getCollection } from "astro:content";
+import Container from "@components/Container.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
+import { SITE, HOME, SOCIALS } from "@consts";
+import { Icon } from "astro-icon/components";
+
+const blog = (await getCollection("blog"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
+
+const projects = (await getCollection("projects"))
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+---
+
+<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
+  <Container>
+    <section class="animate mb-16">
+      <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8">
+        <div class="space-y-4 md:max-w-2xl">
+          <h1 class="text-2xl md:text-3xl font-bold text-black dark:text-white">
+            Lewis Larsen
+          </h1>
+          <h2 class="text-xl md:text-2xl font-semibold text-black/80 dark:text-white/80">
+            IT & Software Developer
+          </h2>
+          <p class="text-lg leading-relaxed">
+            Long-term software developer and IT specialist.
+          </p>
+          <div>
+            Welcome to my personal site! Here you can find the projects I'm working on and my musings from time-to-time that I've decided are newsworthy. If you have any questions, please feel free to get in touch!
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-4 mt-2 md:mt-0">
+          {
+            SOCIALS.map((SOCIAL) => (
+                <Link
+                    href={SOCIAL.HREF}
+                    external
+                    aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}
+                    class="p-2 rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
+                >
+                  {SOCIAL.ICON ? (
+                      <Icon name={SOCIAL.ICON} class="h-6 w-6" />
+                  ) : (
+                      <span class="text-sm">{SOCIAL.NAME}</span>
+                  )}
+                  <span class="sr-only">{SOCIAL.NAME}</span>
+                </Link>
+            ))
+          }
+          <Link
+              href={`mailto:${SITE.EMAIL}`}
+              aria-label={`Email ${SITE.NAME}`}
+              class="p-2 rounded-full bg-black/5 hover:bg-black/10 dark:bg-white/5 dark:hover:bg-white/10 transition-colors"
+          >
+            <Icon name="email" class="h-6 w-6" />
+            <span class="sr-only">Email</span>
+          </Link>
+        </div>
+      </div>
+    </section>
+
+    <div class="space-y-16">
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">
+            Current Projects
+          </h5>
+          <Link href="/projects"> View all projects </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {
+            projects.map((project) => (
+                <li>
+                  <ArrowCard entry={project} />
+                </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="animate space-y-6">
+        <div class="flex flex-wrap gap-y-2 items-center justify-between">
+          <h5 class="font-semibold text-black dark:text-white">Blog Posts</h5>
+          <Link href="/blog"> View all entries </Link>
+        </div>
+        <ul class="flex flex-col gap-4">
+          {
+            blog.map((post) => (
+                <li>
+                  <ArrowCard entry={post} />
+                </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </Container>
+</PageLayout>

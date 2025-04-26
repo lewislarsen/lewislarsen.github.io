@@ -1,0 +1,73 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+import FormattedDate from "./FormattedDate.astro"; // Importing your existing date component
+
+type Props = {
+  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  featured?: boolean;
+};
+
+const { entry, featured = false } = Astro.props;
+const hasDate = entry.data.date;
+---
+
+<a
+    href={`/${entry.collection}/${entry.slug}`}
+    class={`relative group flex flex-nowrap py-3 px-4 pr-10 rounded-lg border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/5 hover:text-black dark:hover:text-white hover:shadow-md transition-all duration-300 ease-in-out ${featured ? 'bg-black/5 dark:bg-white/5 shadow-sm' : ''}`}
+    aria-label={`Read more about ${entry.data.title}`}
+>
+  <div class="flex flex-col flex-1 truncate">
+    <div class="font-semibold flex items-center gap-4">
+      {entry.data.type && (
+          <Icon
+              name={entry.data.type}
+              class="h-9 w-9 flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
+          />
+      )}
+      <div class="space-y-2">
+        <div class="line-clamp-2">{entry.data.title}</div>
+        {hasDate && (
+            <div class="text-xs text-black/60 dark:text-white/60 font-normal">
+              <FormattedDate date={hasDate} />
+            </div>
+        )}
+        <div class="text-sm line-clamp-2 font-normal text-black/80 dark:text-white/80">
+          {entry.data.description}
+        </div>
+        {entry.data.tags && entry.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-2 mt-1">
+              {entry.data.tags.slice(0, 3).map((tag: string) => (
+                  <span class="text-xs py-0.5 px-2 bg-black/10 dark:bg-white/10 rounded-full">
+                {tag}
+              </span>
+              ))}
+              {entry.data.tags.length > 3 && (
+                  <span class="text-xs py-0.5 px-2 rounded-full">
+                +{entry.data.tags.length - 3}
+              </span>
+              )}
+            </div>
+        )}
+      </div>
+    </div>
+  </div>
+
+  <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      class="absolute top-1/2 right-2 -translate-y-1/2 size-5 stroke-2 fill-none stroke-current transition-transform duration-300 ease-in-out group-hover:translate-x-1"
+  >
+    <line
+        x1="5"
+        y1="12"
+        x2="19"
+        y2="12"
+        class="translate-x-3 group-hover:translate-x-0 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"
+    ></line>
+    <polyline
+        points="12 5 19 12 12 19"
+        class="-translate-x-1 group-hover:translate-x-0 transition-transform duration-300 ease-in-out"
+    ></polyline>
+  </svg>
+</a>
