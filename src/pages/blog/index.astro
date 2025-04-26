@@ -5,15 +5,15 @@ import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import { BLOG } from "@consts";
 
-const data = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const allPosts = (await getCollection("blog"))
+    .filter((post) => !post.data.draft)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 type Acc = {
   [year: string]: CollectionEntry<"blog">[];
 };
 
-const posts = data.reduce((acc: Acc, post) => {
+const postsByYear = allPosts.reduce((acc: Acc, post) => {
   const year = post.data.date.getFullYear().toString();
   if (!acc[year]) {
     acc[year] = [];
@@ -22,7 +22,14 @@ const posts = data.reduce((acc: Acc, post) => {
   return acc;
 }, {});
 
-const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
+const years = Object.keys(postsByYear).sort((a, b) => parseInt(b) - parseInt(a));
+
+const allTags = [...new Set(
+    allPosts
+        .filter(post => post.data.tags && post.data.tags.length > 0)
+        .flatMap(post => post.data.tags)
+)].sort();
+const hasTags = allTags.length > 0;
 ---
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
@@ -32,24 +39,119 @@ const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
       <div>
         Here you can read all the blog entries I've put out over the years, sorted by the newest first. Primarily focused around development but I'm a huge advocate of mental health and wellness.
       </div>
-      <div class="space-y-4">
-        {
-          years.map((year) => (
-            <section class="animate space-y-4">
+
+      {hasTags && (
+          <div class="animate">
+            <div class="font-medium text-black dark:text-white mb-3">Browse by tag:</div>
+            <div class="flex flex-wrap gap-2">
+              {allTags.map(tag => (
+                  <a
+                      href={`/blog?tag=${tag}`}
+                      class="px-2 py-1 text-sm bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-md transition-colors"
+                  >
+                    #{tag}
+                  </a>
+              ))}
+            </div>
+          </div>
+      )}
+
+      <div id="tagFilterDisplay" class="animate hidden">
+        <div class="flex items-center gap-3">
+          <div class="font-medium text-black dark:text-white">
+            Currently filtering by tag: <span id="currentTag" class="px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-md"></span>
+          </div>
+          <a href="/blog" class="text-blue-600 dark:text-blue-400 hover:underline">Clear filter</a>
+        </div>
+      </div>
+
+      <div id="noResultsMessage" class="animate py-6 text-center border border-slate-200 dark:border-slate-800 rounded-lg hidden">
+        <p class="text-slate-600 dark:text-slate-400">No posts found with the selected tag.</p>
+        <a href="/blog" class="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block">View all posts</a>
+      </div>
+
+      <div id="blogPosts" class="space-y-4">
+        {years.map((year) => (
+            <section class="animate space-y-4 year-section" data-year={year}>
               <div class="font-semibold text-black dark:text-white">{year}</div>
               <div>
                 <ul class="flex flex-col gap-4">
-                  {posts[year].map((post) => (
-                    <li>
-                      <ArrowCard entry={post} />
-                    </li>
+                  {postsByYear[year].map((post) => (
+                      <li class="post-item" data-tags={post.data.tags ? JSON.stringify(post.data.tags) : '[]'}>
+                        <ArrowCard entry={post} />
+                      </li>
                   ))}
                 </ul>
               </div>
             </section>
-          ))
-        }
+        ))}
       </div>
     </div>
   </Container>
 </PageLayout>
+
+<script>
+  function filterPostsByTag() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagFilter = urlParams.get('tag');
+    if (!tagFilter) return;
+    const tagDisplay = document.getElementById('tagFilterDisplay');
+    const currentTagSpan = document.getElementById('currentTag');
+    if (tagDisplay && currentTagSpan) {
+      tagDisplay.classList.remove('hidden');
+      currentTagSpan.textContent = `#${tagFilter}`;
+    }
+    const allPosts = document.querySelectorAll('.post-item');
+    let visiblePosts = 0;
+
+    allPosts.forEach(post => {
+      const tagsAttr = post.getAttribute('data-tags');
+      if (!tagsAttr) {
+        post.classList.add('hidden');
+        return;
+      }
+      try {
+        const tags = JSON.parse(tagsAttr);
+        const hasTag = tags.some((tag: string) => tag === tagFilter);
+        if (hasTag) {
+          post.classList.remove('hidden');
+          visiblePosts++;
+        } else {
+          post.classList.add('hidden');
+        }
+      } catch (e) {
+        console.error('Error parsing tags:', e);
+        post.classList.add('hidden');
+      }
+    });
+    document.querySelectorAll('.year-section').forEach(section => {
+      const visiblePostsInSection = section.querySelectorAll('.post-item:not(.hidden)').length;
+      if (visiblePostsInSection === 0) {
+        section.classList.add('hidden');
+      } else {
+        section.classList.remove('hidden');
+      }
+    });
+    const noResultsMsg = document.getElementById('noResultsMessage');
+    if (noResultsMsg) {
+      if (visiblePosts === 0) {
+        noResultsMsg.classList.remove('hidden');
+      } else {
+        noResultsMsg.classList.add('hidden');
+      }
+    }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagFilter = urlParams.get('tag');
+    if (tagFilter) {
+      const tagDisplay = document.getElementById('tagFilterDisplay');
+      const currentTagSpan = document.getElementById('currentTag');
+      if (tagDisplay && currentTagSpan) {
+        tagDisplay.classList.remove('hidden');
+        currentTagSpan.textContent = `#${tagFilter}`;
+      }
+    }
+    filterPostsByTag();
+  });
+</script>
