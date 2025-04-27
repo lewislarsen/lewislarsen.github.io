@@ -36,12 +36,12 @@ const { Content } = await project.render();
                                 height={100}
                                 width={100}
                                 alt={`${project.data.title} thumbnail`}
-                                class="w-20 h-20 object-contain rounded-lg overflow-hidden border-none"
+                                class="w-20 h-20 object-contain rounded-lg overflow-hidden border border-gray-200 dark:border-gray-800"
                         />
                     </div>
                     <div class="flex flex-col">
                         <h2 class="text-xl font-semibold text-black dark:text-white">{project.data.title}</h2>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">{project.data.description}</p>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mt-1 truncate">{project.data.description}</p>
                         {(project.data.websiteURL || project.data.repoURL) && (
                                 <nav class="flex gap-2 mt-3">
                                     {project.data.docsURL && (
@@ -74,7 +74,7 @@ const { Content } = await project.render();
                                 class={`h-5 w-5 ${project.data.activelyBeingDeveloped ? 'text-green-500' : 'text-red-500'}`}
                         />
                     </div>
-                    <span class="mt-1">Launched: {project.data.launchYear}</span>
+                    <span class="mt-2">Launched: {project.data.launchYear}</span>
                 </div>
             </div>
         </div>
