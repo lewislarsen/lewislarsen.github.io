@@ -136,10 +136,7 @@ const { Content } = await project.render();
                         if (latestRelease.message === "Not Found" && latestRelease.status === "404") {
                             latestRelease = null; // No releases exist, so set to null
                         }
-
-                        console.log("Latest release data:", latestRelease); // Log the release data for debugging
                     } catch (releaseError) {
-                        console.log("No latest release found. Error:", releaseError); // Log if no releases exist
                         latestRelease = null; // No releases found
                     }
 
