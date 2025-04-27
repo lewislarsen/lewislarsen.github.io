@@ -14,8 +14,11 @@ const blog = (await getCollection("blog"))
 
 const projects = (await getCollection("projects"))
     .filter((project) => !project.data.draft)
-    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-    .slice(0, SITE.NUM_PROJECTS_ON_HOMEPAGE);
+    .sort((a, b) => {
+      const launchYearA = a.data.launchYear || -Infinity;
+      const launchYearB = b.data.launchYear || -Infinity;
+      return launchYearB - launchYearA;
+    });
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
