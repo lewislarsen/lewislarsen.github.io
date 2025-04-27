@@ -5,7 +5,8 @@ date: Apr 26, 2025
 repoURL: https://github.com/lewislarsen/youtube-channel-notifier  
 launchYear: 2025  
 thumbnailURL: ycn.png  
-activelyBeingDeveloped: true  
+activelyBeingDeveloped: true
+displayGitHubBlock: true
 ---
 
 ### Motivation
