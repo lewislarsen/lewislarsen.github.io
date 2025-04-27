@@ -6,8 +6,12 @@ import ArrowCard from "@components/ArrowCard.astro";
 import { PROJECTS } from "@consts";
 
 const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    .filter((project) => !project.data.draft)
+    .sort((a, b) => {
+      const launchYearA = a.data.launchYear || -Infinity;
+      const launchYearB = b.data.launchYear || -Infinity;
+      return launchYearB - launchYearA;
+    });
 ---
 
 <PageLayout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
