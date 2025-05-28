@@ -1,5 +1,5 @@
 ---
-title: How to deploy multiple instances of Horizon with Ploi
+title: How to deploy Laravel Horizon on a worker server
 description: Tutorial on deploying Horizon on worker servers for Ploi.
 date: May 28, 2025
 tags: ["laravel", "ploi", "horizon"]
