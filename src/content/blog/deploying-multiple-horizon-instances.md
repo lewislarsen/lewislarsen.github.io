@@ -5,9 +5,9 @@ date: May 28, 2025
 tags: ["laravel", "ploi", "horizon"]
 ---
 
-Documentation is scarce when it comes to introducing multiple Horizon instances, and having recently introduced a worker server for one of my projects, I wanted to document this for others in the future that may need it. This is the guide I wish I had when I started.
+Documentation is scarce when it comes to introducing multiple Horizon instances, and having recently spun up a worker server for one of my projects, I wanted to document this for other developers that may need it.
 
-This tutorial is using Ploi, however I imagine the process is similar on Laravel Forge and aspects of the post should hopefully apply there too.
+This tutorial is using Ploi for server management, however I imagine the process is similar on Laravel Forge and aspects of the post should hopefully apply there too.
 
 Your `horizon.php` config will be different depending on how you've configured it, but it should be similar enough for you to follow along. 
 
