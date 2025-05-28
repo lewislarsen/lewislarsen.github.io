@@ -13,7 +13,6 @@ import { Icon } from "astro-icon/components";
     <div class="flex justify-between items-center">
       <div>
         <Icon name="ufp" class="inline h-7 w-7 mb-0.5 mr-1" />
-        Stardate <span id="stardate">calculating...</span>
       </div>
       <div class="flex flex-wrap gap-1 items-center">
         <button
@@ -90,14 +89,3 @@ import { Icon } from "astro-icon/components";
     </div>
   </Container>
 </footer>
-<script type="text/javascript" is:inline>
-  function updateStardate() {
-    const now = new Date(),
-        year = now.getFullYear(),
-        dayOfYear = Math.floor((now - new Date(year, 0, 0)) / (1000 * 60 * 60 * 24));
-    const stardate = ((year - 2323) * 1000 + dayOfYear * 10).toFixed(0).replace('-', '').slice(0, -1);
-    document.getElementById("stardate").textContent = stardate;
-  }
-  updateStardate();
-  document.addEventListener('astro:page-load', updateStardate);
-</script>
