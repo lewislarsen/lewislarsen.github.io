@@ -49,8 +49,10 @@ You might have noticed that both of these variables are empty. Let's fill them i
 
 1. **Create a BetterStack Account**: If you haven't already, sign up for a [BetterStack](https://betterstack.com/) account.
 2. **Create a New Source**: In your BetterStack dashboard, navigate to the "Sources" section and create a new source. Choose "PHP" as the log type.
-3. **Copy the Source Token**: After creating the source, you'll be provided with a source token. This is what you need to put in your `.env` file.
-4. **Copy the Endpoint URL**: The endpoint URL is usually provided in the same section where you found the source token.
+3. **Copy the Source Token**: After creating the source, you'll be provided with a source token.
+4. **Copy the Ingesting Host URL**: The ingesting host URL is provided in the same section where you found the source token.
+
+Copy both the source token and the ingesting host URL from BetterStack.
 
 ![A screenshot of the credentials on BetterStack](/blog/logtail-credentials.png)
 
