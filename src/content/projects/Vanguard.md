@@ -7,7 +7,7 @@ websiteURL: https://vanguardbackup.com
 docsURL: https://docs.vanguardbackup.com
 launchYear: 2024
 thumbnailURL: vanguard.png
-activelyBeingDeveloped: true
+activelyBeingDeveloped: false
 displayGitHubBlock: true
 ---
 
