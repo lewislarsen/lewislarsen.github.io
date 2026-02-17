@@ -5,9 +5,11 @@ date: October 1, 2025
 websiteURL: https://domainwarden.app
 launchYear: 2025
 thumbnailURL: domainwarden.png
-activelyBeingDeveloped: true
+activelyBeingDeveloped: false
 displayGitHubBlock: false
 ---
+
+**Notice: I shut the project down early 2026 due to a lack of traction and it was an expense.**
 
 ### About
 
