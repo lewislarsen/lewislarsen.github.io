@@ -40,22 +40,6 @@ const hasTags = allTags.length > 0;
         Here you can read all the blog entries I've put out over the years, sorted by the newest first. Primarily focused around development but I'm a huge advocate of mental health and wellness.
       </div>
 
-      {hasTags && (
-          <div class="animate">
-            <div class="font-medium text-black dark:text-white mb-3">Browse by tag:</div>
-            <div class="flex flex-wrap gap-2">
-              {allTags.map(tag => (
-                  <a
-                      href={`/blog?tag=${tag}`}
-                      class="px-2 py-1 text-sm bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 rounded-md transition-colors"
-                  >
-                    #{tag}
-                  </a>
-              ))}
-            </div>
-          </div>
-      )}
-
       <div id="tagFilterDisplay" class="animate hidden">
         <div class="flex items-center gap-3">
           <div class="font-medium text-black dark:text-white">
