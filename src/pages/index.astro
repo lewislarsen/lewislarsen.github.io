@@ -11,14 +11,6 @@ const blog = (await getCollection("blog"))
     .filter((post) => !post.data.draft)
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, SITE.NUM_POSTS_ON_HOMEPAGE);
-
-const projects = (await getCollection("projects"))
-    .filter((project) => !project.data.draft)
-    .sort((a, b) => {
-      const launchYearA = a.data.launchYear || -Infinity;
-      const launchYearB = b.data.launchYear || -Infinity;
-      return launchYearB - launchYearA;
-    });
 ---
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
@@ -30,10 +22,10 @@ const projects = (await getCollection("projects"))
             Lewis Larsen
           </h1>
           <p class="text-lg leading-relaxed">
-          IT Professional with a passion for technology and programming.
+          IT Professional with a passion for technology, hardware devices and software.
           </p>
           <div>
-            Welcome to my personal website! Here you can find the projects I've shared and blog posts that I have published.
+            Welcome to my personal website! Here you can find the blog posts that I have published.
           </div>
         </div>
         <div class="flex flex-wrap gap-4 mt-2 md:mt-0">
@@ -65,24 +57,6 @@ const projects = (await getCollection("projects"))
     </section>
 
     <div class="space-y-16">
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Current Projects
-          </h5>
-          <Link href="/projects"> View all projects </Link>
-        </div>
-        <ul class="flex flex-col gap-4">
-          {
-            projects.map((project) => (
-                <li>
-                  <ArrowCard entry={project} />
-                </li>
-            ))
-          }
-        </ul>
-      </section>
-
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
           <h5 class="font-semibold text-black dark:text-white">Blog Posts</h5>
