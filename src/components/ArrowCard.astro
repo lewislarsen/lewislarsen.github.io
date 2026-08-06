@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import FormattedDate from "./FormattedDate.astro";
 type Props = {
-  entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+  entry: CollectionEntry<"blog">;
   featured?: boolean;
 };
 const { entry, featured = false } = Astro.props;
